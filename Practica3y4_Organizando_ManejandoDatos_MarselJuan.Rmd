@@ -381,8 +381,10 @@ Existen variables que, a priori, no tienen demasiado interés para el estudio qu
 * En el data frame  `planes` quédate con todas las variables excepto `speed` y `type`.
 
 ```{r }
-names(flights)
-flights <- fligths[,-c('time_hour')]
+flights<-flights[,!(names(flights) %>% endsWith("time")) & !(names(flights)=='time_hour')]
+
+planes <- planes[,!(names(planes)=='speed' | names(planes)=='type')]
+
 ```
 
 ### Ejercicio 10
