@@ -254,7 +254,7 @@ Convierte el conjunto de datos TB en _tidy_ utilizando `gather` y `separate`.
 names(raw) # para ver cual es la ultima columna
 gather(raw, key = "sexo_edad", value = "casos", m014:fu, na.rm = TRUE) %>%
   separate(sexo_edad, into = c("sexo", "edad"), sep = 1)
-head(tb.tidy)
+
 ```
 
 
@@ -276,7 +276,13 @@ Para obtener la versión _tidy_ primero juntamos todos los días en una variable
 Obtén la versión _tidy_ del conjunto de datos `weather` utilizando las funciones `pivot_longer` y `pivot_wider`. Además cambiaremos las columnas `year`, `month` y `dia` por una única variable `fecha`. Para que la operación `pivot_wider` no de error tendremos que eliminar los NA's cuando usemos `pivot_longer`.
 
 ```{r}
+names(raw)
+raw_days<-raw %>% pivot_longer(cols = d1:d31, names_to = "dia", names_prefix = "d", values_to = "value", values_drop_na = TRUE) 
+head(raw_days)
 
+raw_dates <- raw_tidy %>% pivot_wider(names_from = element, values_from = value) %>%
+  unite(col = "fecha", year, month, dia, sep = "-")
+head(raw_dates)
 
 ```
 
@@ -322,9 +328,7 @@ load("./data/VuelosNY.Rdata")
 
 Muestra las primeras muestras de ambos data frames para hacerte una idea de las variables que contienen. ¿Qué diferencia existe entre la información mostrada en ambos data frames?
 
-```{r }
 
-```
 
 ### Ejercicio 6
 
