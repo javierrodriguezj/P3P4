@@ -207,7 +207,8 @@ Para convertir este conjunto a formato _tidy_ tendremos que agrupar todas las co
 Convierte el dataset `pew_religion` a formato _tidy_ usando `gather`. La columna `income` debe contener una variable de tipo `factor`.
 
 ```{r}
-
+pew_religion_tidy <- gather(pew_religion, key = "income", value = "freq", -religion, factor_key = TRUE)
+head(pew_religion_tidy)
 
 ```
 
