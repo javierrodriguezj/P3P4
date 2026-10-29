@@ -332,7 +332,7 @@ Muestra las primeras muestras de ambos data frames para hacerte una idea de las 
 head(flights)
 head(planes)
 ```
-Aunque los dos dataframes se refieran a datos de aeronaves, __fligths__ contiene la información referida al vuelo (tiempo de duración, salida, llegada, etc) y __planes__ contiene la información técnica de cada avión que va a realizar un vuelo.
+Aunque los dos dataframes se refieran a datos de aeronaves, __fligths__ contiene la información referida al vuelo (tiempo de duración, salida, llegada, etc) y __planes__ contiene la información técnica de cada avión que va a realizar un vuelo. Ambos data frames se puede relacionar mediante la variable _tailnum_
 
 ### Ejercicio 6
 
@@ -349,7 +349,7 @@ planes.f <- planes %>%
   filter(!grepl("MCDONNELL DOUGLAS", manufacturer, ignore.case = TRUE)) %>%
   filter(seats >= 90 & seats <= 210) %>%
   mutate(manufacturer = ifelse(grepl("AIRBUS", manufacturer, ignore.case = TRUE), "AIRBUS COMP", manufacturer))
-head(planes.f)
+
 
 ```
 
@@ -359,7 +359,7 @@ head(planes.f)
 Crea un data frame denominado `flights.f` que contenga los vuelos que involucren a los aviones presentes en el data frame `planes.f`. Para ello utiliza algunas de las funciones de **XXX_join** y la variable `tailnum` que es común en ambos data frames. 
 
 ```{r }
-
+flights.f <- flights %>% inner_join(planes.f, by = "tailnum")
 
 ```
 
