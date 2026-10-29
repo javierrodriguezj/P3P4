@@ -280,7 +280,7 @@ names(raw)
 raw_days<-raw %>% pivot_longer(cols = d1:d31, names_to = "dia", names_prefix = "d", values_to = "value", values_drop_na = TRUE) 
 head(raw_days)
 
-raw_dates <- raw_tidy %>% pivot_wider(names_from = element, values_from = value) %>%
+raw_dates <- raw_days %>% pivot_wider(names_from = element, values_from = value) %>%
   unite(col = "fecha", year, month, dia, sep = "-")
 head(raw_dates)
 
@@ -392,11 +392,11 @@ planes <- planes[,!(names(planes)=='speed' | names(planes)=='type')]
 Incorpora una nueva variable a `flights` denominado `Full_Date` que sea de tipo `character` que incorpore una cadena de texto de la forma `d-m-Y`. Donde `d` indica día, `m` mes e `Y` año, a partir de la información incluida en el data frame. Utiliza una función de **DPLYR** que permita conseguir este propósito. Elimina las variables originales involucradas en la creación de la nueva variable.
 
 ```{r }
-flights<-flights %>%mutate(Full_Date = paste(day, month, year, sep = '-'))
+flights<-flights %>%mutate(Full_Date = paste(day, month, year.x, sep = '-'))
 
-flights <- flights %>% select(-c(year,month, day))
+flights <- flights %>% select(-c(year.x,year.y,month, day))
 
-colnames(flights)
+head(flights)
 
 ```
 
@@ -405,7 +405,9 @@ colnames(flights)
 Utilizando las funciones `group_by`, `summarise` y `filter`, crea un data frame donde se calcule el número de vuelos (`Num_flights`), la distancia media recorrida (`Mean_distance`) y la distancia total recorrida (`Total_distance`) para cada uno de los aviones (`tailnum`) presentes en el conjunto `flights`. Descarta aquellos registros del data frame en los que la variable `tailnum` tenga un valor NA. Utiliza el operador pipe para enlazar las funciones. Almacena el data frame en una variable denominada `Distances_plane`.  
 
 ```{r }
-
+Distances_plane <- flights %>% filter(!is.na(flights$tailnum)) %>%group_by(tailnum)%>% summarise(Num_flights = n(), 
+             Mean_distance = mean(distance),
+             Total_distance = sum(distance))
 ```
 
 
