@@ -2,15 +2,15 @@
 title: "Práctica 3 y 4. Preparación y manejo de Datos"
 subtitle: "Análisis Exploratorio de Datos, Máster en Ciencia de Datos - UV"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    number_sections: no
   html_document:
     echo: yes
     number_sections: no
     theme: lumen
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
-    number_sections: no
 ---
 
 ```{r setup, cache=F, echo=F, message=F, warning=F, tidy=F}
@@ -406,7 +406,7 @@ Utilizando las funciones `group_by`, `summarise` y `filter`, crea un data frame 
 
 ```{r }
 Distances_plane <- flights %>% filter(!is.na(flights$tailnum)) %>%group_by(tailnum)%>% summarise(Num_flights = n(), 
-             Mean_distance = mean(distancen, na.rm= TRUE),
+             Mean_distance = mean(distance, na.rm= TRUE),
              Total_distance = sum(distance, na.rm= TRUE))
 ```
 
