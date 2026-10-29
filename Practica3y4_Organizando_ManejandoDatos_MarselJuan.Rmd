@@ -328,7 +328,11 @@ load("./data/VuelosNY.Rdata")
 
 Muestra las primeras muestras de ambos data frames para hacerte una idea de las variables que contienen. ¿Qué diferencia existe entre la información mostrada en ambos data frames?
 
-
+```{r }
+head(flights)
+head(planes)
+```
+Aunque los dos dataframes se refieran a datos de aeronaves, __fligths__ contiene la información referida al vuelo (tiempo de duración, salida, llegada, etc) y __planes__ contiene la información técnica de cada avión que va a realizar un vuelo.
 
 ### Ejercicio 6
 
