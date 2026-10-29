@@ -251,7 +251,10 @@ Para pasar a formato _tidy_ necesitamos realizar dos operaciones en este caso. E
 Convierte el conjunto de datos TB en _tidy_ utilizando `gather` y `separate`.
 
 ```{r}
-
+names(raw) # para ver cual es la ultima columna
+gather(raw, key = "sexo_edad", value = "casos", m014:fu, na.rm = TRUE) %>%
+  separate(sexo_edad, into = c("sexo", "edad"), sep = 1)
+head(tb.tidy)
 ```
 
 
