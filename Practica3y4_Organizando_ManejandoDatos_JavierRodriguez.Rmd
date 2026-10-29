@@ -394,7 +394,7 @@ Incorpora una nueva variable a `flights` denominado `Full_Date` que sea de tipo 
 ```{r }
 flights<-flights %>%mutate(Full_Date = paste(day, month, year.x, sep = '-'))
 
-flights <- flights %>% select(-c(year.x,year.y,month, day))
+flights <- flights %>% select(-c(year.x,year.y,month, day)) # year.x son vuelos y year.y es año de construcción
 
 head(flights)
 
@@ -406,8 +406,8 @@ Utilizando las funciones `group_by`, `summarise` y `filter`, crea un data frame 
 
 ```{r }
 Distances_plane <- flights %>% filter(!is.na(flights$tailnum)) %>%group_by(tailnum)%>% summarise(Num_flights = n(), 
-             Mean_distance = mean(distance),
-             Total_distance = sum(distance))
+             Mean_distance = mean(distancen, na.rm= TRUE),
+             Total_distance = sum(distance, na.rm= TRUE))
 ```
 
 
